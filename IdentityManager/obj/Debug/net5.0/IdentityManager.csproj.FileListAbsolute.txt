@@ -226,3 +226,5 @@ C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\obj\Debug\net5.0\Iden
 C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\obj\Debug\net5.0\ref\IdentityManager.dll
 C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\obj\Debug\net5.0\IdentityManager.pdb
 C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\obj\Debug\net5.0\IdentityManager.genruntimeconfig.cache
+C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\obj\Debug\net5.0\Razor\Views\Account\Register.cshtml.g.cs
+C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\obj\Debug\net5.0\Razor\Views\Shared\_LoginPartialCustom.cshtml.g.cs
