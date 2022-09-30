@@ -77,5 +77,43 @@ namespace IdentityManager.Controllers
 
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
+
+
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            
+
+            return View();
+        }
+
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel loginVM)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _signManager.PasswordSignInAsync(loginVM.Email, loginVM.Password, loginVM.RememberMe, lockoutOnFailure: false);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Invalid attempt for login detected!");
+                    return View(loginVM);
+                }
+            }
+
+            return View(loginVM);
+        }
+
+
+
     }
 }
