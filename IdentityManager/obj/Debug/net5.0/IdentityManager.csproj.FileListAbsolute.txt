@@ -229,3 +229,4 @@ C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\obj\Debug\net5.0\Iden
 C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\obj\Debug\net5.0\Razor\Views\Account\Register.cshtml.g.cs
 C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\obj\Debug\net5.0\Razor\Views\Shared\_LoginPartialCustom.cshtml.g.cs
 C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\obj\Debug\net5.0\Razor\Views\Account\Login.cshtml.g.cs
+C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\obj\Debug\net5.0\Razor\Views\Account\Lockout.cshtml.g.cs

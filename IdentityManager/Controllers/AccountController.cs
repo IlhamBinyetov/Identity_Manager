@@ -27,8 +27,10 @@ namespace IdentityManager.Controllers
 
         [HttpGet]
 
-        public async Task<IActionResult> Register()
+        public async Task<IActionResult> Register(string returnUrl=null)
         {
+            ViewData["ReturnUrl"] = returnUrl;
+
             RegisterViewModel registerVM = new RegisterViewModel();
 
             return View(registerVM);
@@ -37,8 +39,10 @@ namespace IdentityManager.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel registerVM)
+        public async Task<IActionResult> Register(RegisterViewModel registerVM, string returnUrl = null)
         {
+            ViewData["ReturnUrl"] = returnUrl;
+            returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser
@@ -52,7 +56,7 @@ namespace IdentityManager.Controllers
                 if (result.Succeeded)
                 {
                     await _signManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    return LocalRedirect(returnUrl);
                 }
                 AddErrors(result);
             }
@@ -81,9 +85,9 @@ namespace IdentityManager.Controllers
 
 
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl = null)
         {
-            
+            ViewData["ReturnUrl"] = returnUrl;
 
             return View();
         }
@@ -93,16 +97,24 @@ namespace IdentityManager.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel loginVM)
+        public async Task<IActionResult> Login(LoginViewModel loginVM, string returnUrl = null)
+        
         {
+            ViewData["ReturnUrl"] = returnUrl;
+            returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var result = await _signManager.PasswordSignInAsync(loginVM.Email, loginVM.Password, loginVM.RememberMe, lockoutOnFailure: false);
+                var result = await _signManager.PasswordSignInAsync(loginVM.Email, loginVM.Password, loginVM.RememberMe, lockoutOnFailure: true);
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return LocalRedirect(returnUrl);
                 }
+                else if (result.IsLockedOut)
+                {
+                    return View("Lockout");
+                }
+
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Invalid attempt for login detected!");

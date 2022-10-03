@@ -28,6 +28,14 @@ namespace IdentityManager
         {
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+            services.Configure<IdentityOptions>(opt =>
+            {
+                opt.Password.RequireLowercase = true;
+                opt.Password.RequiredLength = 5;
+                opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromSeconds(20);
+                opt.Lockout.MaxFailedAccessAttempts = 2;
+            });
+           
             services.AddControllersWithViews();
         }
 
