@@ -230,3 +230,11 @@ C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\obj\Debug\net5.0\Razo
 C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\obj\Debug\net5.0\Razor\Views\Shared\_LoginPartialCustom.cshtml.g.cs
 C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\obj\Debug\net5.0\Razor\Views\Account\Login.cshtml.g.cs
 C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\obj\Debug\net5.0\Razor\Views\Account\Lockout.cshtml.g.cs
+C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\obj\Debug\net5.0\Razor\Views\Account\ForgotPassword.cshtml.g.cs
+C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\obj\Debug\net5.0\Razor\Views\Account\ForgotPasswordConfirmation.cshtml.g.cs
+C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\bin\Debug\net5.0\IdentityManager.StaticWebAssets.xml
+C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\bin\Debug\net5.0\Mailjet.Client.dll
+C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.UI.Views.V4.dll
+C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.UI.dll
+C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\bin\Debug\net5.0\Microsoft.Extensions.FileProviders.Embedded.dll
+C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\obj\Debug\net5.0\IdentityManager.MvcApplicationPartsAssemblyInfo.cs

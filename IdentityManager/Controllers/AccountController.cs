@@ -1,6 +1,7 @@
 ﻿using IdentityManager.Models;
 using IdentityManager.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,13 @@ namespace IdentityManager.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signManager;
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        private readonly IEmailSender _emailSender;
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IEmailSender emailSender)
         {
             _userManager = userManager;
             _signManager = signInManager;
+            _emailSender = emailSender;
+
         }
 
 
@@ -126,6 +130,52 @@ namespace IdentityManager.Controllers
         }
 
 
+
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            
+
+            return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgotPassWord(ForgotPasswordViewModel forgotVM)
+
+        {
+
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(forgotVM.Email);
+                if(user == null)
+                {
+                    return RedirectToAction("ForgotPasswordConfirmation");
+                }
+
+                var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+
+
+                await _emailSender.SendEmailAsync(forgotVM.Email, "Reset Password - Identity Manager", "Please reset your password by clicking here: <a href=\"" + callbackUrl + "\">");
+
+
+                return RedirectToAction("ForgotPasswordConfirmation");
+            }
+       
+
+            return View(forgotVM);
+        }
+
+
+
+        [HttpGet]
+        public IActionResult ForgotPasswordConfirmation()
+        {
+
+            return View();
+        }
 
     }
 }
