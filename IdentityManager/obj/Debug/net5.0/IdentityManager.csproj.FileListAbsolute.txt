@@ -240,3 +240,5 @@ C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\bin\Debug\net5.0\Micr
 C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\obj\Debug\net5.0\IdentityManager.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\obj\Debug\net5.0\Razor\Views\Account\ResetPassword.cshtml.g.cs
 C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\obj\Debug\net5.0\Razor\Views\Account\ResetPasswordConfirmation.cshtml.g.cs
+C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\obj\Debug\net5.0\Razor\Views\Account\ConfirmEmail.cshtml.g.cs
+C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\obj\Debug\net5.0\Razor\Views\Account\Error.cshtml.g.cs
