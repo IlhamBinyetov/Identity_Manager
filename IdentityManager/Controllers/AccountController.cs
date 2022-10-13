@@ -31,7 +31,7 @@ namespace IdentityManager.Controllers
 
         [HttpGet]
 
-        public async Task<IActionResult> Register(string returnUrl=null)
+        public async Task<IActionResult> Register(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
 
@@ -72,7 +72,7 @@ namespace IdentityManager.Controllers
                 }
                 AddErrors(result);
             }
-           
+
             return View(registerVM);
         }
 
@@ -110,7 +110,7 @@ namespace IdentityManager.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel loginVM, string returnUrl = null)
-        
+
         {
             ViewData["ReturnUrl"] = returnUrl;
             returnUrl = returnUrl ?? Url.Content("~/");
@@ -142,7 +142,7 @@ namespace IdentityManager.Controllers
         [HttpGet]
         public IActionResult ForgotPassword()
         {
-            
+
 
             return View();
         }
@@ -157,7 +157,7 @@ namespace IdentityManager.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(forgotVM.Email);
-                if(user == null)
+                if (user == null)
                 {
                     return RedirectToAction("ForgotPasswordConfirmation");
                 }
@@ -172,7 +172,7 @@ namespace IdentityManager.Controllers
 
                 return RedirectToAction("ForgotPasswordConfirmation");
             }
-       
+
 
             return View(forgotVM);
         }
@@ -215,7 +215,7 @@ namespace IdentityManager.Controllers
                     return RedirectToAction("ResetPasswordConfirmation");
                 }
                 AddErrors(result);
-                
+
             }
 
 
@@ -235,14 +235,14 @@ namespace IdentityManager.Controllers
         [HttpGet]
         public async Task<IActionResult> ConfirmEmail(string userId, string code)
         {
-            if(userId == null || code == null)
+            if (userId == null || code == null)
             {
                 return View("Error");
             }
 
             var user = await _userManager.FindByIdAsync(userId);
 
-            if(user == null)
+            if (user == null)
             {
                 return View("Error");
             }
@@ -251,6 +251,17 @@ namespace IdentityManager.Controllers
 
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        
+        public IActionResult ExternalLogin(string provider, string returnUrl = null)
+        {
+            var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl });
+            var properties = _signManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+
+
+            return Challenge(properties, provider);
+        }
 
     }
 }

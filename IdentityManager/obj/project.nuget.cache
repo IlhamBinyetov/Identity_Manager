@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "PBmbERNRsuhb76N2QN7W3/NIfXotfdo/2yJgVULdsuRNmZTZQdHrijtLSgt3N7z/FR3z5fw/xDQrQXavRFrQbg==",
+  "dgSpecHash": "d5UOSdNPcayaN9m2uIndC+7qOCPuPVx+d9qXm433FAt2UxHfpw56Zl0FT7808Eliy3aLPASlTqtfNbvUT1GE7Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\Taleh-PC\\Desktop\\Identity_Manager\\IdentityManager\\IdentityManager.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Taleh-PC\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Taleh-PC\\.nuget\\packages\\mailjet.api\\1.2.3\\mailjet.api.1.2.3.nupkg.sha512",
+    "C:\\Users\\Taleh-PC\\.nuget\\packages\\microsoft.aspnetcore.authentication.facebook\\5.0.17\\microsoft.aspnetcore.authentication.facebook.5.0.17.nupkg.sha512",
     "C:\\Users\\Taleh-PC\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.17\\microsoft.aspnetcore.cryptography.internal.5.0.17.nupkg.sha512",
     "C:\\Users\\Taleh-PC\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\5.0.17\\microsoft.aspnetcore.cryptography.keyderivation.5.0.17.nupkg.sha512",
     "C:\\Users\\Taleh-PC\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",

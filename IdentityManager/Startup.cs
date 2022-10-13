@@ -38,7 +38,12 @@ namespace IdentityManager
                 opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromSeconds(20);
                 opt.Lockout.MaxFailedAccessAttempts = 5;
             });
-           
+
+            services.AddAuthentication().AddFacebook(options =>
+            {
+                options.AppId = "665089041594066";
+                options.AppSecret = "8f2014f58de45f62dd8611bb2f90752d";
+            });
             services.AddControllersWithViews();
         }
 
