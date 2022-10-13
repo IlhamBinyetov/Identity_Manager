@@ -238,3 +238,5 @@ C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\bin\Debug\net5.0\Micr
 C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.UI.dll
 C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\bin\Debug\net5.0\Microsoft.Extensions.FileProviders.Embedded.dll
 C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\obj\Debug\net5.0\IdentityManager.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\obj\Debug\net5.0\Razor\Views\Account\ResetPassword.cshtml.g.cs
+C:\Users\Taleh-PC\Desktop\Identity_Manager\IdentityManager\obj\Debug\net5.0\Razor\Views\Account\ResetPasswordConfirmation.cshtml.g.cs

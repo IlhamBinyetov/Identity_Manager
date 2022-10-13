@@ -158,7 +158,8 @@ namespace IdentityManager.Controllers
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
 
 
-                await _emailSender.SendEmailAsync(forgotVM.Email, "Reset Password - Identity Manager", "Please reset your password by clicking here: <a href=\"" + callbackUrl + "\">");
+                await _emailSender.SendEmailAsync(forgotVM.Email, "Reset Password - Identity Manager",
+                    "Please reset your password by clicking here : <a href=\"" + callbackUrl + "\">link</a>");
 
 
                 return RedirectToAction("ForgotPasswordConfirmation");
@@ -196,21 +197,21 @@ namespace IdentityManager.Controllers
                 var user = await _userManager.FindByEmailAsync(resetVM.Email);
                 if (user == null)
                 {
-                    return RedirectToAction("ForgotPasswordConfirmation");
+                    return RedirectToAction("ResetPasswordConfirmation");
                 }
 
-                var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+                var result = await _userManager.ResetPasswordAsync(user, resetVM.Code, resetVM.Password);
 
-
-                await _emailSender.SendEmailAsync(resetVM.Email, "Reset Password - Identity Manager", "Please reset your password by clicking here: <a href=\"" + callbackUrl + "\">");
-
-
-                return RedirectToAction("ForgotPasswordConfirmation");
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ResetPasswordConfirmation");
+                }
+                AddErrors(result);
+                
             }
 
 
-            return View(resetVM);
+            return View();
         }
 
 
