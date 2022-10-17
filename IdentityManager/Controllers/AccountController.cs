@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace IdentityManager.Controllers
@@ -253,14 +254,53 @@ namespace IdentityManager.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        
-        public IActionResult ExternalLogin(string provider, string returnUrl = null)
+         public IActionResult ExternalLogin(string provider, string returnUrl = null)
         {
             var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl });
             var properties = _signManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
 
-
             return Challenge(properties, provider);
+        }
+
+
+
+
+
+        [HttpGet]
+        public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
+        {
+
+            if(remoteError != null)
+            {
+                ModelState.AddModelError(string.Empty, $"Error from external provider:{remoteError}");
+                return View(nameof(Login));
+            }
+
+            var info = _signManager.GetExternalLoginInfoAsync();
+
+            if(info == null)
+            {
+                return RedirectToAction(nameof(Login));
+            }
+
+            var result = await _signManager.ExternalLoginSignInAsync(info.Result.LoginProvider, info.Result.ProviderKey, isPersistent: false);
+
+            if (result.Succeeded)
+            {
+                await _signManager.UpdateExternalAuthenticationTokensAsync(await info);
+                return LocalRedirect(returnUrl);
+            }
+            else
+            {
+                ViewData["ReturnUrl"] = returnUrl;
+                ViewData["ProviderDisplayName"] = info.Result.ProviderDisplayName;
+                var email = info.Result.Principal.FindFirstValue(ClaimTypes.Email);
+                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = email });
+
+            }
+
+            
+         
         }
 
     }
