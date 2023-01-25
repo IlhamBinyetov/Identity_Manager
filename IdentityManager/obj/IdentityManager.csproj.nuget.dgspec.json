@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Taleh-PC\\Desktop\\Identity_Manager\\IdentityManager\\IdentityManager.csproj": {}
+    "C:\\Users\\Taleh-PC\\Desktop\\Ilham Tasks\\Identity_Manager\\IdentityManager\\IdentityManager.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Taleh-PC\\Desktop\\Identity_Manager\\IdentityManager\\IdentityManager.csproj": {
+    "C:\\Users\\Taleh-PC\\Desktop\\Ilham Tasks\\Identity_Manager\\IdentityManager\\IdentityManager.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Taleh-PC\\Desktop\\Identity_Manager\\IdentityManager\\IdentityManager.csproj",
+        "projectUniqueName": "C:\\Users\\Taleh-PC\\Desktop\\Ilham Tasks\\Identity_Manager\\IdentityManager\\IdentityManager.csproj",
         "projectName": "IdentityManager",
-        "projectPath": "C:\\Users\\Taleh-PC\\Desktop\\Identity_Manager\\IdentityManager\\IdentityManager.csproj",
+        "projectPath": "C:\\Users\\Taleh-PC\\Desktop\\Ilham Tasks\\Identity_Manager\\IdentityManager\\IdentityManager.csproj",
         "packagesPath": "C:\\Users\\Taleh-PC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Taleh-PC\\Desktop\\Identity_Manager\\IdentityManager\\obj\\",
+        "outputPath": "C:\\Users\\Taleh-PC\\Desktop\\Ilham Tasks\\Identity_Manager\\IdentityManager\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Taleh-PC\\AppData\\Roaming\\NuGet\\NuGet.Config",

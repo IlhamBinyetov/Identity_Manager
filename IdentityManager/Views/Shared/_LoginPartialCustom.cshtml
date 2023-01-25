@@ -14,7 +14,7 @@
     @if (signInManager.IsSignedIn(User))
     {
                 <li class="nav-item mr-2">
-                    <a class="nav-link" href="#">Hello @applicationUser.Name</a>
+                    <a class="nav-link" href="#">Hello @applicationUser?.Name</a>
 
                 </li>
 

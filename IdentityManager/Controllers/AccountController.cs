@@ -1,5 +1,6 @@
 ﻿using IdentityManager.Models;
 using IdentityManager.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -267,41 +268,105 @@ namespace IdentityManager.Controllers
 
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
         {
-
-            if(remoteError != null)
+            returnUrl = returnUrl ?? Url.Content("~/");
+            
+            if (remoteError != null)
             {
                 ModelState.AddModelError(string.Empty, $"Error from external provider:{remoteError}");
                 return View(nameof(Login));
             }
 
-            var info = _signManager.GetExternalLoginInfoAsync();
+            var info = await _signManager.GetExternalLoginInfoAsync();
 
             if(info == null)
             {
                 return RedirectToAction(nameof(Login));
             }
 
-            var result = await _signManager.ExternalLoginSignInAsync(info.Result.LoginProvider, info.Result.ProviderKey, isPersistent: false);
+            var result = await _signManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false);
 
             if (result.Succeeded)
             {
-                await _signManager.UpdateExternalAuthenticationTokensAsync(await info);
+                await _signManager.UpdateExternalAuthenticationTokensAsync(info);
                 return LocalRedirect(returnUrl);
             }
             else
             {
                 ViewData["ReturnUrl"] = returnUrl;
-                ViewData["ProviderDisplayName"] = info.Result.ProviderDisplayName;
-                var email = info.Result.Principal.FindFirstValue(ClaimTypes.Email);
-                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = email });
+                ViewData["ProviderDisplayName"] = info.ProviderDisplayName;
+                var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+                var name = info.Principal.FindFirstValue(ClaimTypes.Name);
+                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = email, Name = name });
 
             }
 
-            
-         
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnurl = null)
+        {
+            returnurl = returnurl ?? Url.Content("~/");
+            if (ModelState.IsValid)
+            {
+                var info = _signManager.GetExternalLoginInfoAsync();
+                if(info == null)
+                {
+                    return View("Error");
+                }
+
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Name = model.Name };
+                var result = await _userManager.CreateAsync(user);
+
+                if (result.Succeeded)
+                {
+                    result = await _userManager.AddLoginAsync(user, await info);
+                    if (result.Succeeded)
+                    {
+                        await _signManager.SignInAsync(user, isPersistent: false);
+                        await _signManager.UpdateExternalAuthenticationTokensAsync(await info);
+
+                        return LocalRedirect(returnurl);
+                    }
+                }
+                AddErrors(result);
+            }
+            ViewData["ReturnUrl"] = returnurl;
+            return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EnableAuthenticator()
+        {
+            var user = await _userManager.GetUserAsync(User);
+           await _userManager.ResetAuthenticatorKeyAsync(user);
+            var token = await _userManager.GetAuthenticatorKeyAsync(user);
+            var model = new TwoFactorAuthenticationViewModel() {Token = token };
+            return View(model);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> EnableAuthenticator(TwoFactorAuthenticationViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.GetUserAsync(User);
+                var succeded = await _userManager.VerifyTwoFactorTokenAsync(user, _userManager.Options.Tokens.AuthenticatorTokenProvider, model.Token);
+                if (succeded)
+                {
+                    await _userManager.SetTwoFactorEnabledAsync(user, true);
+                }
+                else
+                {
+                    ModelState.AddModelError("Verify", "Your two factor auth code could not be avalidated");
+                    return View(model);
+                }
+            }
+            return RedirectToAction("AuthenticatorConfirmation");
+        }
     }
 }

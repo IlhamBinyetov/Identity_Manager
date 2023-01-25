@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "d5UOSdNPcayaN9m2uIndC+7qOCPuPVx+d9qXm433FAt2UxHfpw56Zl0FT7808Eliy3aLPASlTqtfNbvUT1GE7Q==",
+  "dgSpecHash": "Xdm8p8Y6P4rRDhEdAUTdmSZpLhiHHjOm96KrEDvLrAFHuaVbfclYYw/xSf5LWE7jbM5WArl9nHFzouUrmou8ZA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Taleh-PC\\Desktop\\Identity_Manager\\IdentityManager\\IdentityManager.csproj",
+  "projectFilePath": "C:\\Users\\Taleh-PC\\Desktop\\Ilham Tasks\\Identity_Manager\\IdentityManager\\IdentityManager.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Taleh-PC\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Taleh-PC\\.nuget\\packages\\mailjet.api\\1.2.3\\mailjet.api.1.2.3.nupkg.sha512",
